@@ -5,9 +5,7 @@
 <div class="container content-inside">
   <div class="row">
     <div class="greet_start mt-3">
-      <h2>mezase!</h2>
-      <h2>goodkomyunike-syonn</h2>
-      <a class="start_btn btn mt-2" href="/talk" role="button">会話を始める</a>
+      <h2>疲れ気味の女上司</h2>
     </div>
   </div>
   <p class="description mt-3">gosetumei</p>

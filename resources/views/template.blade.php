@@ -8,7 +8,7 @@
   {{-- CSRF トークン --}}
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>@if (! Request::is('/')){{ $title }} | @endif{{ env('APP_NAME') }}</title>
+  <title>{{ env('APP_NAME') }}</title>
 
   {{-- CSS --}}
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
