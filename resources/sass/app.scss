@@ -1,0 +1,77 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.main{
+  min-height: 100%;
+}
+.content-inside {
+  padding: 20px;
+  padding-bottom: 50px;
+}
+.footer {
+  height: 50px;
+  margin-top: -50px;
+}
+
+.navbar-toggler{
+  border-color: #ffffff;
+}
+
+.top{
+  background:url(/images/top.jpg) center no-repeat; background-size: cover
+}
+
+.footer {
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 20px;
+  background-color:#F9AA8F;;
+}
+
+.greet_start{
+  margin: 0 auto;
+  // background-color:#BEF7F7;
+  padding: 24px;
+  text-align: center;
+  .start_btn{
+    width:250px;
+    color: white;
+    background-color:pink;
+    margin: 0 auto;
+  }
+}
+
+.description {
+	color: #444;
+	font-size: 24px;
+	display: flex;
+	align-items: center;
+}
+.description:before, .description:after {
+	content: "";
+	flex-grow: 1;
+	height: 1px;
+	background: #444;
+	display: block;
+}
+.description:before {
+	margin-right: .4em;
+}
+.description:after {
+	margin-left: .4em;
+}
+
+.description_content{
+  font-size: 18px;
+}
