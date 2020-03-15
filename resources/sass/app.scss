@@ -37,6 +37,7 @@ html, body {
   /* Set the fixed height of the footer here */
   height: 20px;
   background-color:#F9AA8F;;
+  margin-top: auto;
 }
 
 .greet_start{
@@ -74,4 +75,43 @@ html, body {
 
 .description_content{
   font-size: 18px;
+}
+
+.q_img{
+  width: 100%;
+}
+@media screen and (min-width:480px) { 
+  /*　画面サイズが480pxからはここを読み込む　*/
+  .q_img{
+    width:50%;
+  }
+}
+
+.question_title{
+  padding: 0 10px 10px 10px;
+  text-align: center;
+}
+.question_q{
+  background-color: #ffc6e2;
+  padding: 5px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  min-height: 50px;
+}
+
+.question_answer{
+  background-color: #eaeaea;
+  padding: 5px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center; 
+  margin-top: 15px ;
+  margin-bottom: 15px ;
+  min-height: 50px;
+  cursor: pointer;
+
+
 }

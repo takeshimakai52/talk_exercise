@@ -3,22 +3,29 @@
 
 @section('content')
 <div class="container content-inside">
-  <div class="row">
-    <div class="greet_start mt-3">
-      <h2>疲れ気味の女上司</h2>
+    <div class="question_title mt-3">
+      <h3>分け隔てなく接してくれる女子マネージャー</h3>
+    </div>
+  <div class="Q">
+    <div class="description_content" style="text-align: center;">
+      <img class="q_img" src="/images/q_002.jpg" alt="" style="margin: 0 auto">
+    </div>
+    <div class="question_q mt-3">
+      「試合絶対に勝ってね！」
+    </div>
+    <div class="question_answer_list">
+      <div class="question_answer">
+        ありがとう！頑張るよ！！
+      </div>
+      <div class="question_answer">
+        任せろ。夢の舞台はすぐそこだ。
+      </div>
+      <div class="question_answer">
+        あぁ、うん。
+      </div>
     </div>
   </div>
-  <p class="description mt-3">gosetumei</p>
-  <div class="row">
-    <div class="description_content col-md-6">
-      一問一答形式の会話を成立させコミュニケーション能力の向上を図ります。
-      選択肢は3つ、グッドコミュニケーションなものを選んでください。
-    </div>
-    <div class="description_content col-md-6" style="text-align: center;">
-      <img src="/images/top.jpg" alt="" style="margin: 0 auto">
-    </div>
-  </div>
-  <p class="description mt-3">osirase</p>
+  <!-- <p class="description mt-3">osirase</p> -->
   <!-- <div class="top mx-auto" style="width: auto;height:300px;"> -->
     
   </div>
