@@ -2022,14 +2022,36 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       show: false,
-      after_show_result: true
+      after_show_result: true,
+      reanswer_good: false,
+      reanswer_normal: false,
+      reanswer_bad: false,
+      advice_good: false,
+      advice_normal: false,
+      advice_bad: false,
+      good: 0,
+      normal: 1,
+      bad: 2,
+      questions: {}
     };
   },
   methods: {
-    show_result: function show_result() {
-      console.log("jfoingoew");
+    show_result: function show_result(feeling) {
+      console.log("show_result()が処理されているよ！");
       this.after_show_result = false;
-    } // getTasks() {
+
+      if (feeling == 0) {
+        this.advice_good = true;
+        this.reanswer_good = true;
+      } else if (feeling == 1) {
+        this.advice_normal = true;
+        this.reanswer_normal = true;
+      } else {
+        this.advice_bad = true;
+        this.reanswer_bad = true;
+      }
+    },
+    // getTasks() {
     //     axios.get('/api/tasks')
     //     // axios は Promise オブジェクトを返すので 
     //     // .done()、.catch()、.then() などで結果を受け取ります。
@@ -2047,9 +2069,18 @@ __webpack_require__.r(__webpack_exports__);
     //       //削除後一覧を読みこみ直す。
     //     })
     // }
+    getQuestion: function getQuestion() {
+      var _this = this;
 
+      axios.get('/api/question').then(function (res) {
+        _this.questions = res.data; // console.log(this.questions);
+
+        console.log(_this.questions[0].title);
+      });
+    }
   },
-  mounted: function mounted() {// this.getTasks();
+  mounted: function mounted() {
+    this.getQuestion();
   }
 });
 
@@ -37472,55 +37503,260 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container content-inside" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "Q" }, [
+      _c("div", {
+        staticClass: "description_content",
+        staticStyle: { "text-align": "center" }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.after_show_result,
+              expression: "after_show_result"
+            }
+          ],
+          staticClass: "question_q mt-3"
+        },
+        [_vm._v("\n      question\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.reanswer_good,
+              expression: "reanswer_good"
+            }
+          ],
+          staticClass: "question_q mt-3"
+        },
+        [_vm._v("\n      「応援してるからね！！」\n      answer_re1\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.reanswer_normal,
+              expression: "reanswer_normal"
+            }
+          ],
+          staticClass: "question_q mt-3"
+        },
+        [_vm._v("\n      「応援してるからね！！」\n      answer_re2\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.reanswer_bad,
+              expression: "reanswer_bad"
+            }
+          ],
+          staticClass: "question_q mt-3"
+        },
+        [_vm._v("\n      「…うん！」\n      answer_re3\n    ")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "question_answer_list" }, [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.after_show_result,
+                expression: "after_show_result"
+              }
+            ],
+            staticClass: "question_answer",
+            on: {
+              click: function($event) {
+                return _vm.show_result(_vm.good)
+              }
+            }
+          },
+          [
+            _vm._v(
+              "\n        ありがとう！頑張るよ！！\n        answer1\n      "
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.after_show_result,
+                expression: "after_show_result"
+              }
+            ],
+            staticClass: "question_answer",
+            on: {
+              click: function($event) {
+                return _vm.show_result(_vm.normal)
+              }
+            }
+          },
+          [_vm._v("\n        あぁ、うん。\n        answer2\n      ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.after_show_result,
+                expression: "after_show_result"
+              }
+            ],
+            staticClass: "question_answer",
+            on: {
+              click: function($event) {
+                return _vm.show_result(_vm.bad)
+              }
+            }
+          },
+          [
+            _vm._v(
+              "\n        任せろ。夢の舞台はすぐそこだ。\n        answer3\n      "
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.advice_good,
+                expression: "advice_good"
+              }
+            ],
+            staticClass: "question_advice"
+          },
+          [
+            _c("h4", { staticClass: "good mb-3" }, [
+              _vm._v("\n          グッドコミュニケーション！\n        ")
+            ]),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c("button", { staticClass: "btn btn-default" }, [_vm._v("次へ")])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.advice_normal,
+                expression: "advice_normal"
+              }
+            ],
+            staticClass: "question_advice"
+          },
+          [
+            _c("h4", { staticClass: "normal mb-3" }, [
+              _vm._v("\n          ノーマルコミュニケーション\n        ")
+            ]),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c("button", { staticClass: "btn btn-default" }, [_vm._v("次へ")])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.advice_bad,
+                expression: "advice_bad"
+              }
+            ],
+            staticClass: "question_advice"
+          },
+          [
+            _c("h4", { staticClass: "bad mb-3" }, [
+              _vm._v("\n          バッドコミュニケーション\n        ")
+            ]),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _c("button", { staticClass: "btn btn-default" }, [_vm._v("次へ")])
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container content-inside" }, [
-      _c("div", { staticClass: "question_title mt-3" }, [
-        _c("h3", [_vm._v("分け隔てなく接してくれる女子マネージャー")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "Q" }, [
-        _c(
-          "div",
-          {
-            staticClass: "description_content",
-            staticStyle: { "text-align": "center" }
-          },
-          [
-            _c("img", {
-              staticClass: "q_img",
-              staticStyle: { margin: "0 auto" },
-              attrs: { src: "/images/q_002.jpg", alt: "" }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "question_q mt-3" }, [
-          _vm._v("\n      「応援してるからね！！」\n      answer_re1\n    ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "question_answer_list" }, [
-          _c("div", { staticClass: "question_advice" }, [
-            _c("h4", { staticClass: "normal mb-3" }, [
-              _vm._v("\n          ノーマルコミュニケーション\n        ")
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "advice_comment" }, [
-              _c("strong", [_vm._v("advise:")]),
-              _vm._v(
-                "\n          元気が足りません。緊張しているのですか？\n        "
-              )
-            ]),
-            _vm._v(" "),
-            _c("button", { staticClass: "btn btn-default" }, [_vm._v("次へ")])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "question_title mt-3" }, [
+      _c("h3", [_vm._v("ああああああああああああああああああああ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "advice_comment" }, [
+      _c("strong", [_vm._v("advise:")]),
+      _vm._v("\n          爽やかでいいですね。\n        ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "advice_comment" }, [
+      _c("strong", [_vm._v("advise:")]),
+      _vm._v("\n          元気が足りません。緊張しているのですか？\n        ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "advice_comment" }, [
+      _c("strong", [_vm._v("advise:")]),
+      _vm._v("\n          落ち着いてください。\n        ")
     ])
   }
 ]

@@ -1,3 +1,10 @@
+<?php
+use App\QuestionTable;
+
+use Illuminate\Http\Request;
+$tests=QuestionTable::find(1);
+echo $tests->title;
+?>
 @extends('template')
 
 
