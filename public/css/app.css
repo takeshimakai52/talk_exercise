@@ -11001,3 +11001,43 @@ body {
   cursor: pointer;
 }
 
+.question_advice {
+  border: 4px solid #ccc;
+  margin-top: 25px;
+  padding: 17px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.question_advice .good {
+  color: #f36c62;
+  text-align: center;
+  font-weight: 800;
+}
+
+.question_advice .bad {
+  color: #1e88e5;
+  text-align: center;
+  font-weight: 800;
+}
+
+.question_advice .normal {
+  color: rgba(250, 207, 76, 0.97);
+  text-align: center;
+  font-weight: 800;
+}
+
+.question_advice .advice_comment {
+  text-align: left;
+}
+
+.question_advice .btn-default {
+  font-weight: 700;
+  background-color: rgba(250, 207, 76, 0.97);
+  border-color: rgba(232, 192, 72, 0.97);
+  margin: auto;
+  min-width: 210px;
+  color: white;
+  font-size: larger;
+}
+

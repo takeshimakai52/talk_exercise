@@ -49,17 +49,18 @@
       </div>
     </div>
   </nav>
-</div>
-<main class="main">
+  <main class="main">
     @yield('content')
-</main>
+  </main>
 </div>
-<footer class="footer">
+
+
+<!-- <footer class="footer">
   <div class="container">
     <p class="text-muted" style="margin-top: 0!important;margin-bottom: 0rem!important;">
     Place sticky footer content here.</p>
   </div>
-</footer>
+</footer> -->
 {{-- JavaScript --}}
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
