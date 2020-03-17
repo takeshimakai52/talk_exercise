@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class TalkController extends Controller
 {
-    public function show(){
-        $test="test";
+    public function show($id){
+        $test=QuestionTable::find($id);;
         $tests=QuestionTable::all();
-        return $tests;
+
+        return $test;
     }
 }

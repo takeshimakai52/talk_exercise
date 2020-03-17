@@ -3,35 +3,36 @@
     <div class="question_title mt-3">
       <!-- <h3>分け隔てなく接してくれる女子マネージャー</h3> -->
       <h3>ああああああああああああああああああああ</h3>
+      <!-- <h3>{{questions.title}}</h3> -->
     </div>
     <div class="Q">
       <div class="description_content" style="text-align: center;">
+        <img class="q_img"  v-bind:src="questions.image_path" alt="" style="margin: 0 auto">
         <!-- <img class="q_img" src="/images/q_002.jpg" alt="" style="margin: 0 auto"> -->
       </div>
       <div class="question_q mt-3" v-show="after_show_result">
         <!-- 「試合絶対に勝ってね！」 -->
-        question
+        {{questions.question}}
       </div>
       <div class="question_q mt-3" v-show="reanswer_good">
-        「応援してるからね！！」
-        answer_re1
+        <!-- 「応援してるからね！！」 -->
+        {{questions.re_answer_good}}
       </div>
       <div class="question_q mt-3" v-show="reanswer_normal">
-        「応援してるからね！！」
-        answer_re2
+        <!-- 「応援してるからね。」 -->
+        {{questions.re_answer_normal}}
       </div>
       <div class="question_q mt-3" v-show="reanswer_bad">
-        「…うん！」
-        answer_re3
+        <!-- 「…うん！」 -->
+        {{questions.re_answer_bad}}
       </div>
       <div class="question_answer_list">
         <div class="question_answer" @click="show_result(good)" v-show="after_show_result">
-          ありがとう！頑張るよ！！
-          answer1
+          <!-- ありがとう！頑張るよ！！ -->
+          {{questions.answer_good}}
         </div>
         <div class="question_answer" @click="show_result(normal)" v-show="after_show_result">
-          あぁ、うん。
-          answer2
+          {{questions.answer_normal}}
         </div>
         <div class="question_answer" @click="show_result(bad)" v-show="after_show_result">
           任せろ。夢の舞台はすぐそこだ。
@@ -91,6 +92,8 @@ export default {
             normal:1,
             bad:2,
             questions:{},
+            tag_id:1,
+            
         }
     },
     methods: {
@@ -128,11 +131,14 @@ export default {
         //     })
         // }
       getQuestion(){
-          axios.get('/api/question')
+          axios.get('/api/question/' + this.tag_id)
+          // axios は Promise オブジェクトを返すので 
+          // .done()、.catch()、.then() などで結果を受け取ります。
             .then((res)=>{
               this.questions=res.data;
               // console.log(this.questions);
-              console.log(this.questions[0].title)
+              console.log(this.questions.image_path);
+              
             });
             
         },
