@@ -2019,10 +2019,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      show: false,
       after_show_result: true,
       reanswer_good: false,
       reanswer_normal: false,
@@ -2034,7 +2035,8 @@ __webpack_require__.r(__webpack_exports__);
       normal: 1,
       bad: 2,
       questions: {},
-      tag_id: 1
+      tag_id: 1,
+      sentakushi: []
     };
   },
   methods: {
@@ -2042,10 +2044,11 @@ __webpack_require__.r(__webpack_exports__);
       console.log("show_result()が処理されているよ！");
       this.after_show_result = false;
 
-      if (feeling == 0) {
+      if (feeling == this.questions.answer_good) {
         this.advice_good = true;
         this.reanswer_good = true;
-      } else if (feeling == 1) {
+        console.log("good");
+      } else if (feeling == this.questions.answer_normal) {
         this.advice_normal = true;
         this.reanswer_normal = true;
       } else {
@@ -2053,37 +2056,47 @@ __webpack_require__.r(__webpack_exports__);
         this.reanswer_bad = true;
       }
     },
-    // getTasks() {
-    //     axios.get('/api/tasks')
-    //     // axios は Promise オブジェクトを返すので 
-    //     // .done()、.catch()、.then() などで結果を受け取ります。
-    //         .then((res) => {
-    //             this.tasks = res.data;
-    //         });
-    //         // 引数 res の中にステータス、ステータステキスト、データが格納されています。
-    //         // res.status、res.statusText、res.data で取得します。
-    // },
-    // deleteTask(id){
-    //   axios.delete('/api/tasks/' + id)
-    //   //apiで削除
-    //     .then((res)=>{
-    //       this.getTasks();
-    //       //削除後一覧を読みこみ直す。
-    //     })
-    // }
     getQuestion: function getQuestion() {
       var _this = this;
 
       axios.get('/api/question/' + this.tag_id) // axios は Promise オブジェクトを返すので 
-      // .done()、.catch()、.then() などで結果を受け取ります。
+      // .done()、.catch()、.then() などで結果を受け取る。
       .then(function (res) {
         _this.questions = res.data; // console.log(this.questions);
+        // console.log(this.questions.image_path);
+        // this.sentakushi = [];
+        //選択肢をランダムで表示するため
 
-        console.log(_this.questions.image_path);
+        _this.sentakushi.push(_this.questions.answer_good, _this.questions.answer_normal, _this.questions.answer_bad);
+
+        for (var i = _this.sentakushi.length - 1; i >= 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var _ref = [_this.sentakushi[j], _this.sentakushi[i]];
+          _this.sentakushi[i] = _ref[0];
+          _this.sentakushi[j] = _ref[1];
+        }
+
+        console.log(_this.sentakushi);
       });
+    },
+    next: function next() {
+      this.after_show_result = true;
+      this.reanswer_good = false;
+      this.reanswer_normal = false;
+      this.reanswer_bad = false;
+      this.advice_good = false;
+      this.advice_normal = false;
+      this.advice_bad = false;
+      this.tag_id++;
+      this.questions = {};
+      this.sentakushi = [];
+      this.getQuestion();
+      console.log("next()が処理されています！" + this.tag_id);
     }
   },
-  mounted: function mounted() {
+  mounted: function mounted() {// this.getQuestion();
+  },
+  created: function created() {
     this.getQuestion();
   }
 });
@@ -37508,23 +37521,15 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container content-inside" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "question_title mt-3" }, [
+      _c("h3", [_vm._v(_vm._s(_vm.questions.title))])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "Q" }, [
-      _c(
-        "div",
-        {
-          staticClass: "description_content",
-          staticStyle: { "text-align": "center" }
-        },
-        [
-          _c("img", {
-            staticClass: "q_img",
-            staticStyle: { margin: "0 auto" },
-            attrs: { src: _vm.questions.image_path, alt: "" }
-          })
-        ]
-      ),
+      _c("div", {
+        staticClass: "description_content",
+        staticStyle: { "text-align": "center" }
+      }),
       _vm._v(" "),
       _c(
         "div",
@@ -37605,15 +37610,11 @@ var render = function() {
             staticClass: "question_answer",
             on: {
               click: function($event) {
-                return _vm.show_result(_vm.good)
+                return _vm.show_result(_vm.sentakushi[0])
               }
             }
           },
-          [
-            _vm._v(
-              "\n        " + _vm._s(_vm.questions.answer_good) + "\n      "
-            )
-          ]
+          [_vm._v("\n        " + _vm._s(_vm.sentakushi[0]) + "\n      ")]
         ),
         _vm._v(" "),
         _c(
@@ -37630,15 +37631,11 @@ var render = function() {
             staticClass: "question_answer",
             on: {
               click: function($event) {
-                return _vm.show_result(_vm.normal)
+                return _vm.show_result(_vm.sentakushi[1])
               }
             }
           },
-          [
-            _vm._v(
-              "\n        " + _vm._s(_vm.questions.answer_normal) + "\n      "
-            )
-          ]
+          [_vm._v("\n        " + _vm._s(_vm.sentakushi[1]) + "\n      ")]
         ),
         _vm._v(" "),
         _c(
@@ -37655,15 +37652,11 @@ var render = function() {
             staticClass: "question_answer",
             on: {
               click: function($event) {
-                return _vm.show_result(_vm.bad)
+                return _vm.show_result(_vm.sentakushi[2])
               }
             }
           },
-          [
-            _vm._v(
-              "\n        任せろ。夢の舞台はすぐそこだ。\n        answer3\n      "
-            )
-          ]
+          [_vm._v("\n        " + _vm._s(_vm.sentakushi[2]) + "\n      ")]
         ),
         _vm._v(" "),
         _c(
@@ -37684,9 +37677,27 @@ var render = function() {
               _vm._v("\n          グッドコミュニケーション！\n        ")
             ]),
             _vm._v(" "),
-            _vm._m(1),
+            _c("p", { staticClass: "advice_comment" }, [
+              _c("strong", [_vm._v("advise:")]),
+              _vm._v(
+                "\n          " +
+                  _vm._s(_vm.questions.advice_good) +
+                  "\n        "
+              )
+            ]),
             _vm._v(" "),
-            _c("button", { staticClass: "btn btn-default" }, [_vm._v("次へ")])
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-default",
+                on: {
+                  click: function($event) {
+                    return _vm.next()
+                  }
+                }
+              },
+              [_vm._v("次へ")]
+            )
           ]
         ),
         _vm._v(" "),
@@ -37708,9 +37719,27 @@ var render = function() {
               _vm._v("\n          ノーマルコミュニケーション\n        ")
             ]),
             _vm._v(" "),
-            _vm._m(2),
+            _c("p", { staticClass: "advice_comment" }, [
+              _c("strong", [_vm._v("advise:")]),
+              _vm._v(
+                "\n          " +
+                  _vm._s(_vm.questions.advice_normal) +
+                  "\n        "
+              )
+            ]),
             _vm._v(" "),
-            _c("button", { staticClass: "btn btn-default" }, [_vm._v("次へ")])
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-default",
+                on: {
+                  click: function($event) {
+                    return _vm.next()
+                  }
+                }
+              },
+              [_vm._v("次へ")]
+            )
           ]
         ),
         _vm._v(" "),
@@ -37732,52 +37761,32 @@ var render = function() {
               _vm._v("\n          バッドコミュニケーション\n        ")
             ]),
             _vm._v(" "),
-            _vm._m(3),
+            _c("p", { staticClass: "advice_comment" }, [
+              _c("strong", [_vm._v("advise:")]),
+              _vm._v(
+                "\n          " + _vm._s(_vm.questions.advice_bad) + "\n        "
+              )
+            ]),
             _vm._v(" "),
-            _c("button", { staticClass: "btn btn-default" }, [_vm._v("次へ")])
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-default",
+                on: {
+                  click: function($event) {
+                    return _vm.next()
+                  }
+                }
+              },
+              [_vm._v("次へ")]
+            )
           ]
         )
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "question_title mt-3" }, [
-      _c("h3", [_vm._v("ああああああああああああああああああああ")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "advice_comment" }, [
-      _c("strong", [_vm._v("advise:")]),
-      _vm._v("\n          爽やかでいいですね。\n        ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "advice_comment" }, [
-      _c("strong", [_vm._v("advise:")]),
-      _vm._v("\n          元気が足りません。緊張しているのですか？\n        ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "advice_comment" }, [
-      _c("strong", [_vm._v("advise:")]),
-      _vm._v("\n          落ち着いてください。\n        ")
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

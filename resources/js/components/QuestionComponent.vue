@@ -2,12 +2,12 @@
   <div class="container content-inside">
     <div class="question_title mt-3">
       <!-- <h3>分け隔てなく接してくれる女子マネージャー</h3> -->
-      <h3>ああああああああああああああああああああ</h3>
-      <!-- <h3>{{questions.title}}</h3> -->
+      <!-- <h3>ああああああああああああああああああああ</h3> -->
+      <h3>{{questions.title}}</h3>
     </div>
     <div class="Q">
       <div class="description_content" style="text-align: center;">
-        <img class="q_img"  v-bind:src="questions.image_path" alt="" style="margin: 0 auto">
+        <!-- <img class="q_img"  v-bind:src="questions.image_path" alt="" style="margin: 0 auto"> -->
         <!-- <img class="q_img" src="/images/q_002.jpg" alt="" style="margin: 0 auto"> -->
       </div>
       <div class="question_q mt-3" v-show="after_show_result">
@@ -27,16 +27,18 @@
         {{questions.re_answer_bad}}
       </div>
       <div class="question_answer_list">
-        <div class="question_answer" @click="show_result(good)" v-show="after_show_result">
+        <div class="question_answer" @click="show_result(sentakushi[0])" v-show="after_show_result">
           <!-- ありがとう！頑張るよ！！ -->
-          {{questions.answer_good}}
+          <!-- {{questions.answer_good}} -->
+          {{sentakushi[0]}}
         </div>
-        <div class="question_answer" @click="show_result(normal)" v-show="after_show_result">
-          {{questions.answer_normal}}
+        <div class="question_answer" @click="show_result(sentakushi[1])" v-show="after_show_result">
+          <!-- {{questions.answer_normal}} -->
+          {{sentakushi[1]}}
         </div>
-        <div class="question_answer" @click="show_result(bad)" v-show="after_show_result">
-          任せろ。夢の舞台はすぐそこだ。
-          answer3
+        <div class="question_answer" @click="show_result(sentakushi[2])" v-show="after_show_result">
+          <!-- {{questions.answer_bad}} -->
+          {{sentakushi[2]}}
         </div>
         <div class="question_advice" v-show="advice_good">
           <h4 class="good mb-3" >
@@ -44,9 +46,9 @@
           </h4>
           <p class="advice_comment">
             <strong>advise:</strong>
-            爽やかでいいですね。
+            {{questions.advice_good}}
           </p>
-          <button class="btn btn-default">次へ</button>
+          <button class="btn btn-default"  @click="next()">次へ</button>
         </div>
         <div class="question_advice" v-show="advice_normal">
           <h4 class="normal mb-3" >
@@ -54,9 +56,9 @@
           </h4>
           <p class="advice_comment">
             <strong>advise:</strong>
-            元気が足りません。緊張しているのですか？
+            {{questions.advice_normal}}
           </p>
-          <button class="btn btn-default">次へ</button>
+          <button class="btn btn-default"  @click="next()">次へ</button>
         </div>
          <div class="question_advice" v-show="advice_bad">
           <h4 class="bad mb-3" >
@@ -64,9 +66,9 @@
           </h4>
           <p class="advice_comment">
             <strong>advise:</strong>
-            落ち着いてください。
+            {{questions.advice_bad}}
           </p>
-          <button class="btn btn-default">次へ</button>
+          <button class="btn btn-default"  @click="next()">次へ</button>
         </div>
       </div>
     </div>
@@ -80,7 +82,6 @@
 export default {
     data: function () {
         return {
-            show: false,
             after_show_result:true,
             reanswer_good:false,
             reanswer_normal:false,
@@ -93,17 +94,20 @@ export default {
             bad:2,
             questions:{},
             tag_id:1,
-            
+            sentakushi:[],
+
         }
     },
     methods: {
       show_result(feeling){
         console.log("show_result()が処理されているよ！");
         this.after_show_result=false;
-        if(feeling==0){
+
+        if(feeling==this.questions.answer_good){
           this.advice_good=true;
           this.reanswer_good=true;
-        }else if(feeling==1){
+          console.log("good")
+        }else if(feeling==this.questions.answer_normal){
           this.advice_normal=true;
           this.reanswer_normal=true;
         }else{
@@ -111,39 +115,45 @@ export default {
           this.reanswer_bad=true;
         }
       },
-
-        // getTasks() {
-        //     axios.get('/api/tasks')
-        //     // axios は Promise オブジェクトを返すので 
-        //     // .done()、.catch()、.then() などで結果を受け取ります。
-        //         .then((res) => {
-        //             this.tasks = res.data;
-        //         });
-        //         // 引数 res の中にステータス、ステータステキスト、データが格納されています。
-        //         // res.status、res.statusText、res.data で取得します。
-        // },
-        // deleteTask(id){
-        //   axios.delete('/api/tasks/' + id)
-        //   //apiで削除
-        //     .then((res)=>{
-        //       this.getTasks();
-        //       //削除後一覧を読みこみ直す。
-        //     })
-        // }
       getQuestion(){
           axios.get('/api/question/' + this.tag_id)
           // axios は Promise オブジェクトを返すので 
-          // .done()、.catch()、.then() などで結果を受け取ります。
+          // .done()、.catch()、.then() などで結果を受け取る。
             .then((res)=>{
               this.questions=res.data;
               // console.log(this.questions);
-              console.log(this.questions.image_path);
+              // console.log(this.questions.image_path);
+              // this.sentakushi = [];
               
+              //選択肢をランダムで表示するため
+              this.sentakushi.push(this.questions.answer_good,this.questions.answer_normal,this.questions.answer_bad);
+              for (let i = this.sentakushi.length - 1; i >= 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [this.sentakushi[i], this.sentakushi[j]] = [this.sentakushi[j], this.sentakushi[i]];
+              }
+              console.log(this.sentakushi);
             });
             
         },
+      next(){
+        this.after_show_result=true;
+        this.reanswer_good=false;
+        this.reanswer_normal=false;
+        this.reanswer_bad=false;
+        this.advice_good=false;
+        this.advice_normal=false;
+        this.advice_bad=false;
+        this.tag_id++;
+        this.questions={};
+        this.sentakushi=[];
+        this.getQuestion();
+        console.log("next()が処理されています！"+this.tag_id);
+      }
     },
     mounted() {
+        // this.getQuestion();
+    },
+    created() {
         this.getQuestion();
     }
 }
