@@ -2024,6 +2024,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      image: true,
       after_show_result: true,
       reanswer_good: false,
       reanswer_normal: false,
@@ -2035,8 +2036,10 @@ __webpack_require__.r(__webpack_exports__);
       normal: 1,
       bad: 2,
       questions: {},
-      tag_id: 1,
-      sentakushi: []
+      tag_id: 0,
+      sentakushi: [],
+      count_all_questions: 0,
+      now_count: 0
     };
   },
   methods: {
@@ -2059,10 +2062,13 @@ __webpack_require__.r(__webpack_exports__);
     getQuestion: function getQuestion() {
       var _this = this;
 
+      // axios.get('/api/question/' + this.tag_id)
       axios.get('/api/question/' + this.tag_id) // axios は Promise オブジェクトを返すので 
       // .done()、.catch()、.then() などで結果を受け取る。
       .then(function (res) {
-        _this.questions = res.data; // console.log(this.questions);
+        _this.questions = res.data[_this.tag_id];
+        _this.count_all_questions = res.data.length;
+        console.log(_this.count_all_questions); // console.log(this.questions);
         // console.log(this.questions.image_path);
         // this.sentakushi = [];
         //選択肢をランダムで表示するため
@@ -2075,8 +2081,6 @@ __webpack_require__.r(__webpack_exports__);
           _this.sentakushi[i] = _ref[0];
           _this.sentakushi[j] = _ref[1];
         }
-
-        console.log(_this.sentakushi);
       });
     },
     next: function next() {
@@ -2088,9 +2092,20 @@ __webpack_require__.r(__webpack_exports__);
       this.advice_normal = false;
       this.advice_bad = false;
       this.tag_id++;
+      this.now_count++;
       this.questions = {};
       this.sentakushi = [];
-      this.getQuestion();
+
+      if (this.now_count >= this.count_all_questions) {
+        console.log("もう問題が無いよ");
+        this.after_show_result = false;
+        this.image = false;
+        return;
+      } else {
+        this.getQuestion();
+      } // this.getQuestion();
+
+
       console.log("next()が処理されています！" + this.tag_id);
     }
   },
@@ -37526,10 +37541,28 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "Q" }, [
-      _c("div", {
-        staticClass: "description_content",
-        staticStyle: { "text-align": "center" }
-      }),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.image,
+              expression: "image"
+            }
+          ],
+          staticClass: "description_content",
+          staticStyle: { "text-align": "center" }
+        },
+        [
+          _c("img", {
+            staticClass: "q_img",
+            staticStyle: { margin: "0 auto" },
+            attrs: { src: _vm.questions.image_path, alt: "" }
+          })
+        ]
+      ),
       _vm._v(" "),
       _c(
         "div",
@@ -37544,7 +37577,7 @@ var render = function() {
           ],
           staticClass: "question_q mt-3"
         },
-        [_vm._v("\n      " + _vm._s(_vm.questions.question) + "\n    ")]
+        [_vm._v("\n      「" + _vm._s(_vm.questions.question) + "」\n    ")]
       ),
       _vm._v(" "),
       _c(
@@ -37560,7 +37593,11 @@ var render = function() {
           ],
           staticClass: "question_q mt-3"
         },
-        [_vm._v("\n      " + _vm._s(_vm.questions.re_answer_good) + "\n    ")]
+        [
+          _vm._v(
+            "\n      「" + _vm._s(_vm.questions.re_answer_good) + "」\n    "
+          )
+        ]
       ),
       _vm._v(" "),
       _c(
@@ -37576,7 +37613,11 @@ var render = function() {
           ],
           staticClass: "question_q mt-3"
         },
-        [_vm._v("\n      " + _vm._s(_vm.questions.re_answer_normal) + "\n    ")]
+        [
+          _vm._v(
+            "\n      「" + _vm._s(_vm.questions.re_answer_normal) + "」\n    "
+          )
+        ]
       ),
       _vm._v(" "),
       _c(
@@ -37592,7 +37633,11 @@ var render = function() {
           ],
           staticClass: "question_q mt-3"
         },
-        [_vm._v("\n      " + _vm._s(_vm.questions.re_answer_bad) + "\n    ")]
+        [
+          _vm._v(
+            "\n      「" + _vm._s(_vm.questions.re_answer_bad) + "」\n    "
+          )
+        ]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "question_answer_list" }, [

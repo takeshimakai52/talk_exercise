@@ -6,25 +6,25 @@
       <h3>{{questions.title}}</h3>
     </div>
     <div class="Q">
-      <div class="description_content" style="text-align: center;">
-        <!-- <img class="q_img"  v-bind:src="questions.image_path" alt="" style="margin: 0 auto"> -->
+      <div class="description_content" style="text-align: center;" v-show="image">
+        <img class="q_img"  v-bind:src="questions.image_path" alt="" style="margin: 0 auto">
         <!-- <img class="q_img" src="/images/q_002.jpg" alt="" style="margin: 0 auto"> -->
       </div>
       <div class="question_q mt-3" v-show="after_show_result">
         <!-- 「試合絶対に勝ってね！」 -->
-        {{questions.question}}
+        「{{questions.question}}」
       </div>
       <div class="question_q mt-3" v-show="reanswer_good">
         <!-- 「応援してるからね！！」 -->
-        {{questions.re_answer_good}}
+        「{{questions.re_answer_good}}」
       </div>
       <div class="question_q mt-3" v-show="reanswer_normal">
         <!-- 「応援してるからね。」 -->
-        {{questions.re_answer_normal}}
+        「{{questions.re_answer_normal}}」
       </div>
       <div class="question_q mt-3" v-show="reanswer_bad">
         <!-- 「…うん！」 -->
-        {{questions.re_answer_bad}}
+        「{{questions.re_answer_bad}}」
       </div>
       <div class="question_answer_list">
         <div class="question_answer" @click="show_result(sentakushi[0])" v-show="after_show_result">
@@ -82,6 +82,7 @@
 export default {
     data: function () {
         return {
+            image:true,
             after_show_result:true,
             reanswer_good:false,
             reanswer_normal:false,
@@ -93,8 +94,10 @@ export default {
             normal:1,
             bad:2,
             questions:{},
-            tag_id:1,
+            tag_id:0,
             sentakushi:[],
+            count_all_questions:0,
+            now_count:0,
 
         }
     },
@@ -116,11 +119,14 @@ export default {
         }
       },
       getQuestion(){
+          // axios.get('/api/question/' + this.tag_id)
           axios.get('/api/question/' + this.tag_id)
           // axios は Promise オブジェクトを返すので 
           // .done()、.catch()、.then() などで結果を受け取る。
             .then((res)=>{
-              this.questions=res.data;
+              this.questions=res.data[this.tag_id];
+              this.count_all_questions=res.data.length;
+              console.log(this.count_all_questions);
               // console.log(this.questions);
               // console.log(this.questions.image_path);
               // this.sentakushi = [];
@@ -131,7 +137,6 @@ export default {
                 const j = Math.floor(Math.random() * (i + 1));
                 [this.sentakushi[i], this.sentakushi[j]] = [this.sentakushi[j], this.sentakushi[i]];
               }
-              console.log(this.sentakushi);
             });
             
         },
@@ -144,11 +149,20 @@ export default {
         this.advice_normal=false;
         this.advice_bad=false;
         this.tag_id++;
+        this.now_count++;
         this.questions={};
         this.sentakushi=[];
-        this.getQuestion();
+        if(this.now_count >= this.count_all_questions){
+          console.log("もう問題が無いよ");
+          this.after_show_result=false;
+          this.image=false;
+          return;
+        }else{
+          this.getQuestion();
+        }
+        // this.getQuestion();
         console.log("next()が処理されています！"+this.tag_id);
-      }
+      },
     },
     mounted() {
         // this.getQuestion();
