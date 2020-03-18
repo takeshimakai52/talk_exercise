@@ -78,6 +78,24 @@
                     @endauth
                 </div>
             @endif
+            <!-- @if (Route::has('login'))
+                <div class="top-right links">
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/home') }}">{{ __('home') }}</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">login</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">register</a>
+                            </li>
+                        @endif
+                    @endauth
+                </div>
+            @endif -->
 
             <div class="content">
                 <div class="title m-b-md">

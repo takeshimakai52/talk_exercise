@@ -29,12 +29,39 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         {{-- Navbarの左側 --}}
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="{{ url('posts') }}">{{ __('Posts') }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('users') }}">{{ __('Users') }}</a>
-            </li>
+            </li> -->
+            @if (Route::has('login'))
+              @auth
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ url('/home') }}">{{ __('home') }}</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();
+                      alert('ログアウトしました')">
+                        {{ __('Logout') }}
+                      </a>
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          @csrf
+                      </form>
+                  </li>
+              @else
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ route('login') }}">login</a>
+                  </li>
+                  @if (Route::has('register'))
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{ route('register') }}">register</a>
+                      </li>
+                  @endif
+              @endauth
+            @endif
         </ul>
 
           {{-- Navbarの右側 --}}
