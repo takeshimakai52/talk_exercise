@@ -26,6 +26,7 @@ class QuestionTableSeeder extends Seeder
                 'advice_good'=>'爽やかでいいですね。',
                 'advice_normal'=>'元気が足りません。緊張しているのですか？',
                 'advice_bad'=>'落ち着いてください。',
+                'user_id'=>'1',
             ],
             [
                 'image_path'=>'/images/q_001.jpg',
@@ -40,6 +41,7 @@ class QuestionTableSeeder extends Seeder
                 'advice_good'=>'シンプルでいいですね。',
                 'advice_normal'=>'お疲れさまだけでいいと思います。',
                 'advice_bad'=>'挨拶もできないほど疲れているのですか？',
+                'user_id'=>'1',
             ],
             [
                 'image_path'=>'/images/q_002.jpg',
@@ -54,6 +56,7 @@ class QuestionTableSeeder extends Seeder
                 'advice_good'=>'爽やかでいいですね。',
                 'advice_normal'=>'元気が足りません。緊張しているのですか？',
                 'advice_bad'=>'落ち着いてください。',
+                'user_id'=>'1',
             ],
           ]);
     }

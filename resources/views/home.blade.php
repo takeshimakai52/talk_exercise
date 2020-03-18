@@ -20,5 +20,10 @@
             </div>
         </div>
     </div>
+    <div class="row justify-content-center">
+      <div class="col-8 mt-4" style="text-align:center;">
+        <a class="btn btn-success" href="/home/create" role="button">会話を作成</a>
+      </div>
+    </div>
 </div>
 @endsection

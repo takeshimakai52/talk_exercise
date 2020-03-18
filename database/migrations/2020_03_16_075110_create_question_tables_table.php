@@ -27,6 +27,11 @@ class CreateQuestionTablesTable extends Migration
             $table->string('advice_good');
             $table->string('advice_normal');
             $table->string('advice_bad');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
+            
 
             // $table->integer('category_id')->unsigned();
             // $table->integer('region_id')->unsigned();
