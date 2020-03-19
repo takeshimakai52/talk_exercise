@@ -21,4 +21,10 @@ class QuestionTable extends Model
         'advice_bad',
     ];
 
+    //belongsTo設定
+    // public function user()
+    // {
+    //     return $this->belongsTo('App\User');
+    // }
+
 }

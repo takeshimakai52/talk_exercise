@@ -1,3 +1,8 @@
+@php
+
+
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
@@ -24,6 +29,12 @@
       <div class="col-8 mt-4" style="text-align:center;">
         <a class="btn btn-success" href="/home/create" role="button">会話を作成</a>
       </div>
+    </div>
+    <div class="your_posts">
+    ↓あなたが投稿した会話ですよ<br>
+      @foreach($posts as $post)
+        {{$post->title}}<br>
+      @endforeach
     </div>
 </div>
 @endsection
