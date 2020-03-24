@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\QuestionTable;
+use App\Http\Requests\CreateQuestionRequest;
 
 
 class HomeController extends Controller
@@ -43,6 +44,34 @@ class HomeController extends Controller
 
     public function store(Request $request) 
      { 
+        $request->validate([
+            'title' => 'required|max:50',
+            'question' => 'required',
+            'answer_good'=>'required',
+            'answer_normal'=>'required',
+            'answer_bad'=>'required',
+            're_answer_good'=>'required',
+            're_answer_normal'=>'required',
+            're_answer_bad'=>'required',
+            'advice_good'=>'required',
+            'advice_normal'=>'required',
+            'advice_bad'=>'required',
+            ],
+            [
+            'title.required' => '会話の相手は入力必須です',
+            'question.required' => '一言目は入力必須です',
+            'answer_good.required'=>'あなたのグッドなお返事は入力必須です',
+            'answer_normal.required'=>'あなたのノーマルなお返事は入力必須です',
+            'answer_bad.required'=>'あなたのバッドなお返事は入力必須です',
+            're_answer_good.required'=>'相手ののグッドなお返事は入力必須です',
+            're_answer_normal.required'=>'相手のノーマルなお返事は入力必須です',
+            're_answer_bad.required'=>'相手のバッドなお返事は入力必須です',
+            'advice_good.required'=>'グッドなアドバイスは入力必須です',
+            'advice_normal.required'=>'ノーマルなアドバイスは入力必須です',
+            'advice_bad.required'=>'バッドなアドバイスは入力必須です',
+            ]
+        );
+     
          $question = new QuestionTable(); 
          $user_id=Auth::id();
          if($request->file('image')){

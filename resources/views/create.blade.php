@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+@if ($errors->any())
+  <div class="errors">
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+@endif
 <form method="post" action="/home/store" enctype="multipart/form-data" class="form">
   @csrf
   @method('POST')
@@ -11,21 +20,21 @@
   <div class="form-group">
     <label>会話の相手を入力<span class="attention">必須</span></label>
     <input type="text" class="form-control"
-    name="title" value="{{ old('correct') }}" placeholder="例）お決まりのことを聞く女性">
+    name="title" value="{{ old('title') }}" placeholder="例）お決まりのことを聞く女性">
   </div>
     <!-- image -->
   <div class="form-group form-image-area">
-    <label>画像挿入</label>
+    <label>画像をどうぞ（必須ではありません）</label>
     <div class="form-image js-area-drop">
       <i class="far fa-image fa-5x"></i>
-      <input type="file" class="form-control-file" name="image">
+      <input type="file" class="form-control-file dropify" name="image" value="{{ old('image') }}">
     </div>
   </div>
 
   <div class="form-group">
     <label>一言目を入力<span class="attention">必須</span></label>
     <input type="text" class="form-control{{ $errors->has('correct') ? ' is-invalid' : '' }}" 
-    name="question" value="{{ old('correct') }}" placeholder="例）仕事と私どっちが大事なの！？">
+    name="question" value="{{ old('question') }}" placeholder="例）仕事と私どっちが大事なの！？">
 
   </div>
   <div class="form-group">
@@ -79,6 +88,13 @@
     <input type="text" class="form-control mt-2" 
     name="advice_bad" value="{{ old('advice_bad') }}" placeholder="例）落ち着いてください。">
   </div>
-  <button type="submit" class="btn btn-default btn-large">投稿</button>
+  <button type="submit" class="btn btn-success btn-large">投稿</button>
 </form>
+
+<script>
+    // プラグイン読み込み
+    $(document).ready(function(){
+        $('.dropify').dropify();
+    });
+</script>
 @endsection
