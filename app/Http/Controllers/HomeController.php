@@ -45,8 +45,14 @@ class HomeController extends Controller
      { 
          $question = new QuestionTable(); 
          $user_id=Auth::id();
-         $path = $request->file('image')->store('public/img');
-         $image_path="/storage/img/".basename($path);
+         if($request->file('image')){
+            $path = $request->file('image')->store('public/img');
+            $image_path="/storage/img/".basename($path);
+         }else{
+             $image_path = null;
+         }
+
+        //  $image_path="/storage/img/".basename($path);
          $question->user_id = $request->user()->id;
          $question->title = $request->title;
          $question->question = $request->question;

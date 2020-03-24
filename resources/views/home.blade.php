@@ -34,6 +34,7 @@
     ↓あなたが投稿した会話ですよ<br>
       @foreach($posts as $post)
         {{$post->title}}<br>
+        {{$post->image_path}}<br>
       @endforeach
     </div>
 </div>

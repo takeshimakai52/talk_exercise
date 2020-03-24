@@ -2068,11 +2068,19 @@ __webpack_require__.r(__webpack_exports__);
       // .done()、.catch()、.then() などで結果を受け取る。
       .then(function (res) {
         _this.questions = res.data[_this.tag_id];
-        _this.count_all_questions = res.data.length;
-        console.log(_this.count_all_questions); // console.log(this.questions);
-        // console.log(this.questions.image_path);
-        // this.sentakushi = [];
+        _this.count_all_questions = res.data.length; // console.log(this.count_all_questions);
+        // console.log(this.questions);
+
+        console.log(_this.questions.image_path);
+        _this.filepath = _this.questions.image_path;
+
+        if (_this.filepath) {
+          _this.image = true;
+        } else {
+          _this.image = false;
+        } // this.sentakushi = [];
         //選択肢をランダムで表示するため
+
 
         _this.sentakushi.push(_this.questions.answer_good, _this.questions.answer_normal, _this.questions.answer_bad);
 
@@ -2082,7 +2090,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.sentakushi[i] = _ref[0];
           _this.sentakushi[j] = _ref[1];
         }
-      }); // console.log(this.questions.image_path);
+      }); //  console.log(this.filepath);
       //  this.filepath="asset('/storage/img/"+this.questions.image_path+")";
     },
     next: function next() {
@@ -2106,11 +2114,11 @@ __webpack_require__.r(__webpack_exports__);
         return;
       } else {
         this.getQuestion();
-        this.image = true;
       } // this.getQuestion();
 
 
       console.log("next()が処理されています！" + this.tag_id);
+      console.log(this.questions.image_path);
     }
   },
   mounted: function mounted() {// this.getQuestion();

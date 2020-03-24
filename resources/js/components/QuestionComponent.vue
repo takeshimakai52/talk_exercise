@@ -127,9 +127,15 @@ export default {
             .then((res)=>{
               this.questions=res.data[this.tag_id];
               this.count_all_questions=res.data.length;
-              console.log(this.count_all_questions);
+              // console.log(this.count_all_questions);
               // console.log(this.questions);
-              // console.log(this.questions.image_path);
+              console.log(this.questions.image_path);
+              this.filepath=this.questions.image_path;
+              if(this.filepath){
+                this.image=true;
+              }else{
+                this.image=false;
+              }
               // this.sentakushi = [];
               
               //選択肢をランダムで表示するため
@@ -138,8 +144,10 @@ export default {
                 const j = Math.floor(Math.random() * (i + 1));
                 [this.sentakushi[i], this.sentakushi[j]] = [this.sentakushi[j], this.sentakushi[i]];
               }
+
             });
-          // console.log(this.questions.image_path);
+
+          //  console.log(this.filepath);
           //  this.filepath="asset('/storage/img/"+this.questions.image_path+")";
             
             
@@ -164,11 +172,10 @@ export default {
           return;
         }else{
           this.getQuestion();
-          this.image=true;
-
         }
         // this.getQuestion();
         console.log("next()が処理されています！"+this.tag_id);
+        console.log(this.questions.image_path);
       },
     },
     mounted() {
