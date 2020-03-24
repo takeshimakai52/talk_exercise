@@ -40,9 +40,9 @@
   <div class="form-group">
     <label>返答の選択肢を入力<span class="attention">必須</span></label>
     <span>注意</span>
-    <p>・同じ内容の選択肢は入力しないでください。<br>
+
     <!-- グッドコミュニケーション -->
-    グッドコミュニケーション<br>
+    <p>グッドコミュニケーション</p>
     <input type="text" class="form-control mt-2" 
     name="answer_good" value="{{ old('answer_good') }}" placeholder="例）君より大事なものはないよ">
     ノーマルコミュニケーション<br>
@@ -88,7 +88,10 @@
     <input type="text" class="form-control mt-2" 
     name="advice_bad" value="{{ old('advice_bad') }}" placeholder="例）落ち着いてください。">
   </div>
-  <button type="submit" class="btn btn-success btn-large">投稿</button>
+  <div class="text-center mt-3">
+    <button type="submit" class="btn btn-success btn-large" style="width:200px;">投稿</button>
+  </div>
+  
 </form>
 
 <script>

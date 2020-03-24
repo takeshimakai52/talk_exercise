@@ -20,7 +20,7 @@
                     @endif
 
                     ログインしています！<br>
-                    特に機能はなくただ存在しているだけの認証機能です。<br>
+                    あなたの作成した会話の管理ができます。<br>
                 </div>
             </div>
         </div>
@@ -30,11 +30,11 @@
         <a class="btn btn-success" href="/home/create" role="button">会話を作成</a>
       </div>
     </div>
-    <div class="your_posts">
-    ↓あなたが投稿した会話ですよ<br>
+    <div class="your_posts mt-4">
+    ↓あなたが投稿した会話です<br>
       @foreach($posts as $post)
         {{$post->title}}<br>
-        {{$post->image_path}}<br>
+        <!-- {{$post->image_path}}<br> -->
       @endforeach
     </div>
 </div>
