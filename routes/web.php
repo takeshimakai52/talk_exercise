@@ -30,3 +30,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/create', 'HomeController@create')->name('create');
+Route::post('/home/store', 'HomeController@store')->name('store');

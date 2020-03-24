@@ -7,7 +7,7 @@
     </div>
     <div class="Q">
       <div class="description_content" style="text-align: center;" v-show="image">
-        <img class="q_img"  v-bind:src="questions.image_path" alt="" style="margin: 0 auto">
+        <img class="q_img"  v-bind:src="this.questions.image_path" alt="" style="margin: 0 auto">
         <!-- <img class="q_img" src="/images/q_002.jpg" alt="" style="margin: 0 auto"> -->
       </div>
       <div class="question_q mt-3" v-show="after_show_result">
@@ -98,6 +98,7 @@ export default {
             sentakushi:[],
             count_all_questions:0,
             now_count:0,
+            filepath:null,
 
         }
     },
@@ -138,9 +139,13 @@ export default {
                 [this.sentakushi[i], this.sentakushi[j]] = [this.sentakushi[j], this.sentakushi[i]];
               }
             });
+          // console.log(this.questions.image_path);
+          //  this.filepath="asset('/storage/img/"+this.questions.image_path+")";
+            
             
         },
       next(){
+        this.image=false;
         this.after_show_result=true;
         this.reanswer_good=false;
         this.reanswer_normal=false;
@@ -159,6 +164,8 @@ export default {
           return;
         }else{
           this.getQuestion();
+          this.image=true;
+
         }
         // this.getQuestion();
         console.log("next()が処理されています！"+this.tag_id);

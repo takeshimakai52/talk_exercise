@@ -14,7 +14,7 @@ class QuestionTableSeeder extends Seeder
         // DB::table('question_tables')->truncate();
         DB::table('question_tables')->insert([
             [
-                'image_path'=>'/images/q_002.jpg',
+                'image_path'=>'/storage/img/q_002.jpg',
                 'title'=>'分け隔てなく接してくれる女子マネージャー',
                 'question'=>'試合絶対に勝ってね！',
                 'answer_good'=>'ありがとう！頑張るよ！！',
@@ -29,7 +29,7 @@ class QuestionTableSeeder extends Seeder
                 'user_id'=>'1',
             ],
             [
-                'image_path'=>'/images/q_001.jpg',
+                'image_path'=>'/storage/img/q_001.jpg',
                 'title'=>'test2',
                 'question'=>'お疲れさまです',
                 'answer_good'=>'お疲れさま。',
@@ -44,7 +44,7 @@ class QuestionTableSeeder extends Seeder
                 'user_id'=>'1',
             ],
             [
-                'image_path'=>'/images/q_002.jpg',
+                'image_path'=>'/storage/img/q_002.jpg',
                 'title'=>'test3',
                 'question'=>'試合絶対に勝ってね！',
                 'answer_good'=>'ありがとう！頑張るよ！！',

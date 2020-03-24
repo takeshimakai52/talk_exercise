@@ -2039,7 +2039,8 @@ __webpack_require__.r(__webpack_exports__);
       tag_id: 0,
       sentakushi: [],
       count_all_questions: 0,
-      now_count: 0
+      now_count: 0,
+      filepath: null
     };
   },
   methods: {
@@ -2081,9 +2082,11 @@ __webpack_require__.r(__webpack_exports__);
           _this.sentakushi[i] = _ref[0];
           _this.sentakushi[j] = _ref[1];
         }
-      });
+      }); // console.log(this.questions.image_path);
+      //  this.filepath="asset('/storage/img/"+this.questions.image_path+")";
     },
     next: function next() {
+      this.image = false;
       this.after_show_result = true;
       this.reanswer_good = false;
       this.reanswer_normal = false;
@@ -2103,6 +2106,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       } else {
         this.getQuestion();
+        this.image = true;
       } // this.getQuestion();
 
 
@@ -37559,7 +37563,7 @@ var render = function() {
           _c("img", {
             staticClass: "q_img",
             staticStyle: { margin: "0 auto" },
-            attrs: { src: _vm.questions.image_path, alt: "" }
+            attrs: { src: this.questions.image_path, alt: "" }
           })
         ]
       ),
