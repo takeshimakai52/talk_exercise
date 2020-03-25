@@ -2020,6 +2020,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37868,10 +37875,48 @@ var render = function() {
           ]
         )
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "result",
+        staticStyle: {
+          "z-index": "3",
+          position: "absolute",
+          top: "150px",
+          left: "15%",
+          width: "70%",
+          background: "#cceeff",
+          "box-shadow": "0 4px 16px rgba(0,0,0,.3)",
+          "text-align": "center",
+          padding: "40px 0",
+          "border-radius": "20px"
+        }
+      },
+      [
+        _c("h3", [_vm._v("perfect!")]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "start_btn btn mt-2",
+            attrs: { href: "/talk", role: "button" }
+          },
+          [_vm._v("もういちど")]
+        )
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 

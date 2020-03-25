@@ -10933,6 +10933,13 @@ body {
   margin: 0 auto;
 }
 
+.start_btn {
+  width: 80%;
+  color: white;
+  background-color: pink;
+  margin: 0 auto;
+}
+
 .description {
   color: #444;
   font-size: 24px;

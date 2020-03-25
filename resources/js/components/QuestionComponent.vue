@@ -71,6 +71,13 @@
         </div>
       </div>
     </div>
+    <div class="result"
+    style="z-index:3;position:absolute;top:150px; left:15%;width:70%;
+        background: #cceeff;box-shadow: 0 4px 16px rgba(0,0,0,.3);
+        text-align: center;padding: 40px 0;border-radius: 20px">
+      <h3>perfect!</h3>
+      <a class="start_btn btn mt-2" href="/talk" role="button">もういちど</a>
+    </div>
     <!-- <p class="description mt-3">osirase</p> -->
     <!-- <div class="top mx-auto" style="width: auto;height:300px;"> -->
       
