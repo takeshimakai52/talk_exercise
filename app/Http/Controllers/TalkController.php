@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 class TalkController extends Controller
 {
     public function show($id){
-        // $test=QuestionTable::find($id);;
+        // $tests=QuestionTable::find($id);
+        // $tests=QuestionTable::inRandomOrder()->take(3)
+        // ->get();
         $tests=QuestionTable::all();
         //全部を返して向こうで任意のを取り出すようにしてる
         //$idは使ってない
@@ -18,6 +20,6 @@ class TalkController extends Controller
     // public function allget(){
     //     $allquestions=QuestionTable::all();
 
-    //     return $allquestions;
+    //     return $allquestions;df
     // }
 }

@@ -27,11 +27,11 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-8 mt-4" style="text-align:center;">
-        <a class="btn btn-success" href="/home/create" role="button">会話を作成</a>
+        <a class="btn btn-primary" href="/home/create" role="button" style="width:70%;">会話を作成</a>
       </div>
     </div>
     <div class="your_posts mt-4">
-      ↓あなたが投稿した会話です
+      作成した会話
       @foreach($posts as $post)
         <div class="your_posts_content row my-2">
           <div class="post_title col-8 align-middle" style="font-weight:bold;">

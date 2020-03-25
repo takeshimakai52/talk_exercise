@@ -24,10 +24,23 @@ $tests=QuestionTable::find(1);
       選択肢は3つ、グッドコミュニケーションなものを選んでください。
     </div>
     <div class="description_content col-md-6" style="text-align: center;">
-      <img src="/images/top.jpg" alt="" style="margin: 0 auto">
+      <img src="/images/top.jpg" alt="" style="margin: 0 auto" width="80%">
     </div>
   </div>
+
+  <div class="row mt-5">
+    <div class="description_content col-md-6">
+      ログインしていただくと会話を作成することができます。作成した会話はマイページにて管理していただけます。
+    </div>
+    <div class="description_content col-md-6" style="text-align: center;">
+      <img src="/images/top2.jpg" alt="" style="margin: 0 auto" width="80%">
+    </div>
+  </div>
+
   <p class="description mt-3">osirase</p>
+  <div class="description_content">
+    
+  </div>
   <!-- <div class="top mx-auto" style="width: auto;height:300px;"> -->
     
   </div>

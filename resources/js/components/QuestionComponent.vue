@@ -2,7 +2,6 @@
   <div class="container content-inside">
     <div class="question_title mt-3">
       <!-- <h3>分け隔てなく接してくれる女子マネージャー</h3> -->
-      <!-- <h3>ああああああああああああああああああああ</h3> -->
       <h3>{{questions.title}}</h3>
     </div>
     <div class="Q">
@@ -99,7 +98,9 @@ export default {
             count_all_questions:0,
             now_count:0,
             filepath:null,
-
+            result:0,
+            array:[],
+            all:[],
         }
     },
     methods: {
@@ -110,33 +111,58 @@ export default {
         if(feeling==this.questions.answer_good){
           this.advice_good=true;
           this.reanswer_good=true;
-          console.log("good")
+          this.result=this.result+2;
         }else if(feeling==this.questions.answer_normal){
           this.advice_normal=true;
           this.reanswer_normal=true;
+          this.result=this.result+1;
         }else{
           this.advice_bad=true;
           this.reanswer_bad=true;
+          this.result=this.result;
         }
       },
       getQuestion(){
           // axios.get('/api/question/' + this.tag_id)
+          console.log(this.result);
           axios.get('/api/question/' + this.tag_id)
           // axios は Promise オブジェクトを返すので 
           // .done()、.catch()、.then() などで結果を受け取る。
             .then((res)=>{
-              this.questions=res.data[this.tag_id];
+              //ここで任意のものを取り出してquestionsに入れてる
+              
+              this.all=res.data;
               this.count_all_questions=res.data.length;
-              // console.log(this.count_all_questions);
-              // console.log(this.questions);
-              console.log(this.questions.image_path);
+              // var array = [];
+              if(this.now_count==0){
+                for (var i = 0; i < this.count_all_questions; i++) {
+                    this.array.push(i);
+                }
+              }
+              // for (var i = 0; i < this.count_all_questions; i++) {
+              //     this.array.push(i);
+              // }
+              console.log(this.array);
+              var aaa = this.array;
+              var num = this.array[Math.floor(Math.random() * aaa.length)]
+              //持ってきたQからランダムで1つ取る。重複はしないように。
+              this.questions=res.data[num];
+              console.log(num);
+              aaa.some(function(v, i){
+                  if (v==num) aaa.splice(i,1);    
+              });
+              this.array=aaa;
+              console.log(this.array);
+
+              //console.log(this.count_all_questions);
+              //画像があれば表示
               this.filepath=this.questions.image_path;
               if(this.filepath){
                 this.image=true;
               }else{
                 this.image=false;
               }
-              // this.sentakushi = [];
+               this.sentakushi = [];
               
               //選択肢をランダムで表示するため
               this.sentakushi.push(this.questions.answer_good,this.questions.answer_normal,this.questions.answer_bad);
@@ -165,8 +191,10 @@ export default {
         this.now_count++;
         this.questions={};
         this.sentakushi=[];
-        if(this.now_count >= this.count_all_questions){
+        // if(this.now_count >= this.count_all_questions){
+        if(this.now_count > 2){
           console.log("もう問題が無いよ");
+          console.log(this.result);
           this.after_show_result=false;
           this.image=false;
           return;
@@ -175,7 +203,6 @@ export default {
         }
         // this.getQuestion();
         console.log("next()が処理されています！"+this.tag_id);
-        console.log(this.questions.image_path);
       },
     },
     mounted() {

@@ -2020,7 +2020,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2040,7 +2039,10 @@ __webpack_require__.r(__webpack_exports__);
       sentakushi: [],
       count_all_questions: 0,
       now_count: 0,
-      filepath: null
+      filepath: null,
+      result: 0,
+      array: [],
+      all: []
     };
   },
   methods: {
@@ -2051,43 +2053,69 @@ __webpack_require__.r(__webpack_exports__);
       if (feeling == this.questions.answer_good) {
         this.advice_good = true;
         this.reanswer_good = true;
-        console.log("good");
+        this.result = this.result + 2;
       } else if (feeling == this.questions.answer_normal) {
         this.advice_normal = true;
         this.reanswer_normal = true;
+        this.result = this.result + 1;
       } else {
         this.advice_bad = true;
         this.reanswer_bad = true;
+        this.result = this.result;
       }
     },
     getQuestion: function getQuestion() {
       var _this = this;
 
       // axios.get('/api/question/' + this.tag_id)
+      console.log(this.result);
       axios.get('/api/question/' + this.tag_id) // axios は Promise オブジェクトを返すので 
       // .done()、.catch()、.then() などで結果を受け取る。
       .then(function (res) {
-        _this.questions = res.data[_this.tag_id];
-        _this.count_all_questions = res.data.length; // console.log(this.count_all_questions);
-        // console.log(this.questions);
+        //ここで任意のものを取り出してquestionsに入れてる
+        _this.all = res.data;
+        _this.count_all_questions = res.data.length; // var array = [];
 
-        console.log(_this.questions.image_path);
+        if (_this.now_count == 0) {
+          for (var i = 0; i < _this.count_all_questions; i++) {
+            _this.array.push(i);
+          }
+        } // for (var i = 0; i < this.count_all_questions; i++) {
+        //     this.array.push(i);
+        // }
+
+
+        console.log(_this.array);
+        var aaa = _this.array;
+
+        var num = _this.array[Math.floor(Math.random() * aaa.length)]; //持ってきたQからランダムで1つ取る。重複はしないように。
+
+
+        _this.questions = res.data[num];
+        console.log(num);
+        aaa.some(function (v, i) {
+          if (v == num) aaa.splice(i, 1);
+        });
+        _this.array = aaa;
+        console.log(_this.array); //console.log(this.count_all_questions);
+        //画像があれば表示
+
         _this.filepath = _this.questions.image_path;
 
         if (_this.filepath) {
           _this.image = true;
         } else {
           _this.image = false;
-        } // this.sentakushi = [];
-        //選択肢をランダムで表示するため
+        }
 
+        _this.sentakushi = []; //選択肢をランダムで表示するため
 
         _this.sentakushi.push(_this.questions.answer_good, _this.questions.answer_normal, _this.questions.answer_bad);
 
-        for (var i = _this.sentakushi.length - 1; i >= 0; i--) {
-          var j = Math.floor(Math.random() * (i + 1));
-          var _ref = [_this.sentakushi[j], _this.sentakushi[i]];
-          _this.sentakushi[i] = _ref[0];
+        for (var _i = _this.sentakushi.length - 1; _i >= 0; _i--) {
+          var j = Math.floor(Math.random() * (_i + 1));
+          var _ref = [_this.sentakushi[j], _this.sentakushi[_i]];
+          _this.sentakushi[_i] = _ref[0];
           _this.sentakushi[j] = _ref[1];
         }
       }); //  console.log(this.filepath);
@@ -2105,10 +2133,11 @@ __webpack_require__.r(__webpack_exports__);
       this.tag_id++;
       this.now_count++;
       this.questions = {};
-      this.sentakushi = [];
+      this.sentakushi = []; // if(this.now_count >= this.count_all_questions){
 
-      if (this.now_count >= this.count_all_questions) {
+      if (this.now_count > 2) {
         console.log("もう問題が無いよ");
+        console.log(this.result);
         this.after_show_result = false;
         this.image = false;
         return;
@@ -2118,7 +2147,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
       console.log("next()が処理されています！" + this.tag_id);
-      console.log(this.questions.image_path);
     }
   },
   mounted: function mounted() {// this.getQuestion();
