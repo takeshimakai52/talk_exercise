@@ -31,3 +31,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/create', 'HomeController@create')->name('create');
 Route::post('/home/store', 'HomeController@store')->name('store');
+Route::get('/home/edit/{id}', 'HomeController@edit')->name('edit');
+Route::post('/home/update/{id}', 'HomeController@update')->name('update');
+Route::get('/home/delete/{id}', 'HomeController@delete')->name('delete');
+
+

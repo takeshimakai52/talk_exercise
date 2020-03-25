@@ -31,11 +31,31 @@
       </div>
     </div>
     <div class="your_posts mt-4">
-    ↓あなたが投稿した会話です<br>
+      ↓あなたが投稿した会話です
       @foreach($posts as $post)
-        {{$post->title}}<br>
-        <!-- {{$post->image_path}}<br> -->
+        <div class="your_posts_content row my-2">
+          <div class="post_title col-8 align-middle" style="font-weight:bold;">
+            {{$post->title}}
+          </div>
+          <div class="col-2 ">
+            <a class="btn btn-success float-right" href="/home/edit/{{$post->id}}" role="button">
+              編集
+            </a>
+          </div>
+          <div class="col-2">
+            <a class="btn btn-danger float-right" href="/home/delete/{{$post->id}}" role="button">
+              削除
+            </a>
+          </div>
+        </div>
       @endforeach
+<script>
+
+</script>
+      <!-- @foreach($posts as $post)
+        {{$post->title}}<br> -->
+        <!-- {{$post->image_path}}<br> -->
+      <!-- @endforeach -->
     </div>
 </div>
 @endsection
