@@ -71,12 +71,13 @@
         </div>
       </div>
     </div>
-    <div class="result"
+    <div class="result" v-show="result_box"
     style="z-index:3;position:absolute;top:150px; left:15%;width:70%;
-        background: #cceeff;box-shadow: 0 4px 16px rgba(0,0,0,.3);
+        background: #f0f0f0;box-shadow: 0 4px 16px rgba(0,0,0,.3);
         text-align: center;padding: 40px 0;border-radius: 20px">
-      <h3>perfect!</h3>
+      <h3>{{result_message}}</h3>
       <a class="start_btn btn mt-2" href="/talk" role="button">もういちど</a>
+      <a class="start_btn btn mt-2" href="/" role="button">Topにもどる</a>
     </div>
     <!-- <p class="description mt-3">osirase</p> -->
     <!-- <div class="top mx-auto" style="width: auto;height:300px;"> -->
@@ -108,6 +109,8 @@ export default {
             result:0,
             array:[],
             all:[],
+            result_message:"perfect!",
+            result_box:false,
         }
     },
     methods: {
@@ -204,6 +207,17 @@ export default {
           console.log(this.result);
           this.after_show_result=false;
           this.image=false;
+          if(this.result>5){
+            this.result_message="perfectです!";
+          }else if(this.result>3){
+            this.result_message="goodです!";
+          }else if(this.result>1){
+            this.result_message="not badです";
+          }else{
+            this.result_message="not goodです";
+          }
+          this.result_box=true;
+
           return;
         }else{
           this.getQuestion();

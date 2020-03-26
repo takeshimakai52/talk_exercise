@@ -2027,6 +2027,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2049,7 +2050,9 @@ __webpack_require__.r(__webpack_exports__);
       filepath: null,
       result: 0,
       array: [],
-      all: []
+      all: [],
+      result_message: "perfect!",
+      result_box: false
     };
   },
   methods: {
@@ -2147,6 +2150,18 @@ __webpack_require__.r(__webpack_exports__);
         console.log(this.result);
         this.after_show_result = false;
         this.image = false;
+
+        if (this.result > 5) {
+          this.result_message = "perfectです!";
+        } else if (this.result > 3) {
+          this.result_message = "goodです!";
+        } else if (this.result > 1) {
+          this.result_message = "not badです";
+        } else {
+          this.result_message = "not goodです";
+        }
+
+        this.result_box = true;
         return;
       } else {
         this.getQuestion();
@@ -37877,17 +37892,17 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
+    _c(
       "div",
       {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.result_box,
+            expression: "result_box"
+          }
+        ],
         staticClass: "result",
         staticStyle: {
           "z-index": "3",
@@ -37895,7 +37910,7 @@ var staticRenderFns = [
           top: "150px",
           left: "15%",
           width: "70%",
-          background: "#cceeff",
+          background: "#f0f0f0",
           "box-shadow": "0 4px 16px rgba(0,0,0,.3)",
           "text-align": "center",
           padding: "40px 0",
@@ -37903,7 +37918,7 @@ var staticRenderFns = [
         }
       },
       [
-        _c("h3", [_vm._v("perfect!")]),
+        _c("h3", [_vm._v(_vm._s(_vm.result_message))]),
         _vm._v(" "),
         _c(
           "a",
@@ -37912,11 +37927,21 @@ var staticRenderFns = [
             attrs: { href: "/talk", role: "button" }
           },
           [_vm._v("もういちど")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "start_btn btn mt-2",
+            attrs: { href: "/", role: "button" }
+          },
+          [_vm._v("Topにもどる")]
         )
       ]
     )
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
