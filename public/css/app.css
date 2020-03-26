@@ -11008,6 +11008,9 @@ body {
   min-height: 50px;
   cursor: pointer;
 }
+.question_answer:hover{
+  opacity: 0.8;
+}
 
 .question_advice {
   border: 4px solid #ccc;
