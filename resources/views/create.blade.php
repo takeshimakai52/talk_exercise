@@ -10,6 +10,7 @@
     </ul>
   </div>
 @endif
+
 <form method="post" action="/home/store" enctype="multipart/form-data" class="form">
   @csrf
   @method('POST')
@@ -18,13 +19,13 @@
     <p>一問一答形式の会話(3択)を作成しましょう。</p>
   </div>
   <div class="form-group">
-    <label>会話の相手を入力<span class="attention">必須</span></label>
+    <label class="hutoji">会話の相手を入力</label>
     <input type="text" class="form-control"
     name="title" value="{{ old('title') }}" placeholder="例）お決まりのことを聞く女性">
   </div>
     <!-- image -->
   <div class="form-group form-image-area">
-    <label>画像をどうぞ（必須ではありません）</label>
+    <label class="hutoji">画像をどうぞ（必須ではありません）</label>
     <div class="form-image js-area-drop">
       <i class="far fa-image fa-5x"></i>
       <input type="file" class="form-control-file dropify" name="image" value="{{ old('image') }}">
@@ -32,13 +33,13 @@
   </div>
 
   <div class="form-group">
-    <label>一言目を入力<span class="attention">必須</span></label>
+    <label class="hutoji">一言目を入力</label>
     <input type="text" class="form-control{{ $errors->has('correct') ? ' is-invalid' : '' }}" 
     name="question" value="{{ old('question') }}" placeholder="例）仕事と私どっちが大事なの！？">
 
   </div>
   <div class="form-group">
-    <label>返答の選択肢を入力<span class="attention">必須</span></label>
+    <label class="hutoji">返答の選択肢を入力</label>
 
     <!-- グッドコミュニケーション -->
     <p>グッドコミュニケーション</p>
@@ -56,15 +57,15 @@
   </div>
   <!-- reanswer -->
   <div class="form-group">
-    <label>会話相手の返答を入力<span class="attention">必須</span></label>
+    <label class="hutoji">会話相手の返答を入力</label>
     <!-- グッドコミュニケーション -->
     <p>グッドコミュニケーションに対して</p>
     <input type="text" class="form-control" 
-    name="re_answer_good" value="{{ old('re_answer_good') }}" placeholder="例）…もう。">
+    name="re_answer_good" value="{{ old('re_answer_good') }}" placeholder="例）…もう///">
     ノーマルコミュニケーションに対して<br>
     <!-- ノーマルコミュニケーション -->
     <input type="text" class="form-control mt-2" 
-    name="re_answer_normal" value="{{ old('re_answer_normal') }}" placeholder="例）なにそれ…もういい！">
+    name="re_answer_normal" value="{{ old('re_answer_normal') }}" placeholder="例）じゃあどっちも大事にしたら？">
     バッドコミュニケーションに対して<br>
     <!-- バッドコミュニケーション -->
     <input type="text" class="form-control mt-2" 
@@ -73,7 +74,7 @@
 
   <!-- explain -->
   <div class="form-group">
-    <label>アドバイスを入力<span class="attention">必須</span></label>
+    <label class="hutoji">アドバイスを入力</label>
     <!-- グッドコミュニケーション -->
     <p>グッドコミュニケーションに対して</p>
     <input type="text" class="form-control" 
