@@ -144,7 +144,7 @@ class QuestionTableSeeder extends Seeder
                 're_answer_normal'=>'マジ！？サンキューな！',
                 're_answer_bad'=>'サンキューな！！',
                 'advice_good'=>'相手にしてはいけませんね。',
-                'advice_normal'=>'貸さない方がいいと思いますが。',
+                'advice_normal'=>'貸さない方がいいと思います。',
                 'advice_bad'=>'貸してはいけません。',
                 'user_id'=>'1',
             ],
