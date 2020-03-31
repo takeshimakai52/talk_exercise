@@ -41,7 +41,6 @@ $tests=QuestionTable::find(1);
   <div class="description_content">
     
   </div>
-  <!-- <div class="top mx-auto" style="width: auto;height:300px;"> -->
     
   </div>
 

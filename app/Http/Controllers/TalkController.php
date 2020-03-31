@@ -12,14 +12,15 @@ class TalkController extends Controller
         // $tests=QuestionTable::inRandomOrder()->take(3)
         // ->get();
         $tests=QuestionTable::all();
-        //全部を返して向こうで任意のを取り出すようにしてる
-        //$idは使ってない
+        //全部を返してviewで任意のを取り出す
+        //$idは現状使ってない
         return $tests;
     }
 
-    // public function allget(){
-    //     $allquestions=QuestionTable::all();
+    public function list(){
+        $posts = QuestionTable::latest()->get();
+        return view('list', ['posts' => $posts]);
+    }
 
-    //     return $allquestions;df
-    // }
+
 }

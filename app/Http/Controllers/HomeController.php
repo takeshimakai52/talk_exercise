@@ -32,7 +32,6 @@ class HomeController extends Controller
                 ['user_id', '=', $id]
             ])
             ->get();
-        // return view('home');
         return view('home', ['posts' => $posts]);
     }
 
@@ -80,7 +79,6 @@ class HomeController extends Controller
              $image_path = null;
          }
 
-        //  $image_path="/storage/img/".basename($path);
          $question->user_id = $request->user()->id;
          $question->title = $request->title;
          $question->question = $request->question;
@@ -94,23 +92,6 @@ class HomeController extends Controller
          $question->advice_normal = $request->advice_normal;
          $question->advice_bad = $request->advice_bad;
          $question->image_path = $image_path;
-
-        //  $req=[
-        //     'image_path'=>$image_path,
-        //     'title'=>$request->title,
-        //     'question'=>$request->question,
-        //     'answer_good'=>$request->answer_good,
-        //     'answer_normal'=>$request->answer_normal,
-        //     'answer_bad'=>$request->answer_bad,
-        //     're_answer_good'=>$request->re_answer_good,
-        //     're_answer_normal'=>$request->re_answer_normal,
-        //     're_answer_bad'=>$request->re_answer_bad,
-        //     'advice_good'=>$request->advice_good,
-        //     'advice_normal'=>$request->advice_normal,
-        //     'advice_bad'=>$request->advice_bad,
-        //     'user_id'=>1,
-        //  ];
-        //  $question->fill( $req ); 
          $question->save(); 
          return redirect('/home'); 
      } 
@@ -118,8 +99,6 @@ class HomeController extends Controller
      public function edit($id)
     {
         $posts = QuestionTable::findOrFail($id);
-
-        // return view('home');
         return view('edit', ['posts' => $posts]);
     }
 
@@ -154,7 +133,6 @@ class HomeController extends Controller
         );
      
          $question = QuestionTable::findOrFail($id); 
-        //  $user_id=Auth::id();
          if($request->file('image')){
             $path = $request->file('image')->store('public/img');
             $image_path="/storage/img/".basename($path);

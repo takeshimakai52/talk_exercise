@@ -1,33 +1,26 @@
 <template>
   <div class="container content-inside">
     <div class="question_title mt-3">
-      <!-- <h3>分け隔てなく接してくれる女子マネージャー</h3> -->
       <h3>{{questions.title}}</h3>
     </div>
     <div class="Q">
       <div class="description_content" style="text-align: center;" v-show="image">
         <img class="q_img"  v-bind:src="this.questions.image_path" alt="" style="margin: 0 auto">
-        <!-- <img class="q_img" src="/images/q_002.jpg" alt="" style="margin: 0 auto"> -->
       </div>
       <div class="question_q mt-3" v-show="after_show_result">
-        <!-- 「試合絶対に勝ってね！」 -->
         「{{questions.question}}」
       </div>
       <div class="question_q mt-3" v-show="reanswer_good">
-        <!-- 「応援してるからね！！」 -->
         「{{questions.re_answer_good}}」
       </div>
       <div class="question_q mt-3" v-show="reanswer_normal">
-        <!-- 「応援してるからね。」 -->
         「{{questions.re_answer_normal}}」
       </div>
       <div class="question_q mt-3" v-show="reanswer_bad">
-        <!-- 「…うん！」 -->
         「{{questions.re_answer_bad}}」
       </div>
       <div class="question_answer_list">
         <div class="question_answer" @click="show_result(sentakushi[0])" v-show="after_show_result">
-          <!-- ありがとう！頑張るよ！！ -->
           <!-- {{questions.answer_good}} -->
           {{sentakushi[0]}}
         </div>
@@ -78,10 +71,7 @@
       <h3>{{result_message}}</h3>
       <a class="start_btn btn mt-2" href="/talk" role="button">もういちど</a>
       <a class="start_btn btn mt-2" href="/" role="button">Topにもどる</a>
-    </div>
-    <!-- <p class="description mt-3">osirase</p> -->
-    <!-- <div class="top mx-auto" style="width: auto;height:300px;"> -->
-      
+    </div> 
   </div>
 </template>
 
@@ -109,7 +99,7 @@ export default {
             result:0,
             array:[],
             all:[],
-            result_message:"perfect!",
+            result_message:"",
             result_box:false,
         }
     },
@@ -134,37 +124,28 @@ export default {
       },
       getQuestion(){
           // axios.get('/api/question/' + this.tag_id)
-          console.log(this.result);
           axios.get('/api/question/' + this.tag_id)
           // axios は Promise オブジェクトを返すので 
           // .done()、.catch()、.then() などで結果を受け取る。
             .then((res)=>{
-              //ここで任意のものを取り出してquestionsに入れてる
-              
               this.all=res.data;
               this.count_all_questions=res.data.length;
-              // var array = [];
               if(this.now_count==0){
                 for (var i = 0; i < this.count_all_questions; i++) {
                     this.array.push(i);
                 }
               }
-              // for (var i = 0; i < this.count_all_questions; i++) {
-              //     this.array.push(i);
-              // }
-              console.log(this.array);
               var aaa = this.array;
               var num = this.array[Math.floor(Math.random() * aaa.length)]
               //持ってきたQからランダムで1つ取る。重複はしないように。
+              //apiが叩かれた初回に、取得してきた件数で配列を作る。出題された数は配列から取り除く。
+              //res.dataを別の関数で仕様する方法がわからず、こんな処理に
               this.questions=res.data[num];
-              console.log(num);
               aaa.some(function(v, i){
-                  if (v==num) aaa.splice(i,1);    
+                  if (v==num) aaa.splice(i,1);
               });
               this.array=aaa;
-              console.log(this.array);
 
-              //console.log(this.count_all_questions);
               //画像があれば表示
               this.filepath=this.questions.image_path;
               if(this.filepath){
@@ -172,6 +153,8 @@ export default {
               }else{
                 this.image=false;
               }
+              
+              //選択肢のリセット
                this.sentakushi = [];
               
               //選択肢をランダムで表示するため
@@ -182,11 +165,7 @@ export default {
               }
 
             });
-
-          //  console.log(this.filepath);
-          //  this.filepath="asset('/storage/img/"+this.questions.image_path+")";
-            
-            
+      
         },
       next(){
         this.image=false;
@@ -201,10 +180,9 @@ export default {
         this.now_count++;
         this.questions={};
         this.sentakushi=[];
-        // if(this.now_count >= this.count_all_questions){
+        //3回目の問題が終わるとリザルトを表示
         if(this.now_count > 2){
-          console.log("もう問題が無いよ");
-          console.log(this.result);
+          console.log("３回終わりました");
           this.after_show_result=false;
           this.image=false;
           if(this.result>5){
@@ -222,8 +200,6 @@ export default {
         }else{
           this.getQuestion();
         }
-        // this.getQuestion();
-        console.log("next()が処理されています！"+this.tag_id);
       },
     },
     mounted() {

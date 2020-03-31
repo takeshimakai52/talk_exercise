@@ -29,10 +29,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         {{-- Navbarの左側 --}}
         <ul class="navbar-nav ml-auto">
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="{{ url('posts') }}">{{ __('Posts') }}</a>
-            </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{ url('list') }}">List</a>
+            </li>
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="{{ url('users') }}">{{ __('Users') }}</a>
             </li> -->
             @if (Route::has('login'))

@@ -47,16 +47,13 @@
   <div class="form-group">
     <label>返答の選択肢を入力<span class="attention">必須</span></label>
 
-    <!-- グッドコミュニケーション -->
     <p>グッドコミュニケーション</p>
     <input type="text" class="form-control mt-2" 
     name="answer_good" value="{{ old('answer_good',$posts->answer_good) }}" placeholder="例）君より大事なものはないよ">
     ノーマルコミュニケーション<br>
-    <!-- ノーマルコミュニケーション -->
     <input type="text" class="form-control mt-2" 
     name="answer_normal" value="{{ old('answer_normal',$posts->answer_normal) }}" placeholder="例）どっちも大事だよ">
     バッドコミュニケーション<br>
-    <!-- バッドコミュニケーション -->
     <input type="text" class="form-control mt-2" 
     name="answer_bad" value="{{ old('answer_bad',$posts->answer_bad) }}" placeholder="例）うるせぇなぁ！！">
 
@@ -64,32 +61,26 @@
   <!-- reanswer -->
   <div class="form-group">
     <label>会話相手の返答を入力<span class="attention">必須</span></label>
-    <!-- グッドコミュニケーション -->
     <p>グッドコミュニケーションに対して</p>
     <input type="text" class="form-control" 
     name="re_answer_good" value="{{ old('re_answer_good',$posts->re_answer_good) }}" placeholder="例）…もう。">
     ノーマルコミュニケーションに対して<br>
-    <!-- ノーマルコミュニケーション -->
     <input type="text" class="form-control mt-2" 
     name="re_answer_normal" value="{{ old('re_answer_normal',$posts->re_answer_normal) }}" placeholder="例）なにそれ…もういい！">
     バッドコミュニケーションに対して<br>
-    <!-- バッドコミュニケーション -->
     <input type="text" class="form-control mt-2" 
     name="re_answer_bad" value="{{ old('re_answer_bad',$posts->re_answer_bad) }}" placeholder="例）大きな声出さないでよ！！">
   </div>
 
   <div class="form-group">
     <label>アドバイスを入力<span class="attention">必須</span></label>
-    <!-- グッドコミュニケーション -->
     <p>グッドコミュニケーションに対して</p>
     <input type="text" class="form-control" 
     name="advice_good" value="{{ old('advice_good',$posts->advice_good) }}" placeholder="例）大袈裟に言うくらいが良いでしょうね。">
     ノーマルコミュニケーションに対して<br>
-    <!-- ノーマルコミュニケーション -->
     <input type="text" class="form-control mt-2" 
     name="advice_normal" value="{{ old('advice_normal',$posts->advice_normal) }}" placeholder="例）そんな答えが欲しいわけではないと思いますよ。">
     バッドコミュニケーションに対して<br>
-    <!-- バッドコミュニケーション -->
     <input type="text" class="form-control mt-2" 
     name="advice_bad" value="{{ old('advice_bad',$posts->advice_bad) }}" placeholder="例）落ち着いてください。">
   </div>

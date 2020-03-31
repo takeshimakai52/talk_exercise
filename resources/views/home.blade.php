@@ -49,9 +49,6 @@
           </div>
         </div>
       @endforeach
-<script>
-
-</script>
       <!-- @foreach($posts as $post)
         {{$post->title}}<br> -->
         <!-- {{$post->image_path}}<br> -->

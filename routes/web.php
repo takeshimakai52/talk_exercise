@@ -13,21 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//ルートでメイン画面
 Route::get('/', function () {
     return view('index');
 });
 
+//talk画面へ
 Route::get('/talk', function () {
     return view('talk');
 });
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
+//一覧画面へ(特に機能はなく一覧で表示しているだけ)
+Route::get('/list', 'TalkController@list')->name('list');
 
 Auth::routes();
 
+//ログイン後のhome画面からCRUD
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/create', 'HomeController@create')->name('create');
 Route::post('/home/store', 'HomeController@store')->name('store');

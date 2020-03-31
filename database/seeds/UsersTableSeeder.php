@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'tadokoro',
                 'email' => 'tadokoro@gmail.com',
-                'password' => Hash::make('tadokoro'), // この場合、「my_secure_password」でログインできる
+                'password' => Hash::make('tadokoro'),
             ],
         ]);
     }

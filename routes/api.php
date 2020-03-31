@@ -19,5 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/question/{id}', 'TalkController@show');
-// Route::get('/question/all', 'TalkController@allget');
 

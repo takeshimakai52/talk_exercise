@@ -22,9 +22,9 @@ class QuestionTable extends Model
     ];
 
     //belongsTo設定
-    // public function user()
-    // {
-    //     return $this->belongsTo('App\User');
-    // }
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 
 }

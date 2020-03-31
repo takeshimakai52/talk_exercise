@@ -37,10 +37,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    //hasMany設定
-    // public function questions()
-    // {
-    //     return $this->hasMany('App\QuestionTable');
-    // }
+
+    public function questions()
+    {
+        return $this->hasMany('App\QuestionTable');
+    }
 
 }
