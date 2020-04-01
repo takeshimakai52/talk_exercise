@@ -2018,16 +2018,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2051,7 +2041,7 @@ __webpack_require__.r(__webpack_exports__);
       result: 0,
       array: [],
       all: [],
-      result_message: "perfect!",
+      result_message: "",
       result_box: false
     };
   },
@@ -2078,37 +2068,30 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // axios.get('/api/question/' + this.tag_id)
-      console.log(this.result);
       axios.get('/api/question/' + this.tag_id) // axios は Promise オブジェクトを返すので 
       // .done()、.catch()、.then() などで結果を受け取る。
       .then(function (res) {
-        //ここで任意のものを取り出してquestionsに入れてる
         _this.all = res.data;
-        _this.count_all_questions = res.data.length; // var array = [];
+        _this.count_all_questions = res.data.length;
 
         if (_this.now_count == 0) {
           for (var i = 0; i < _this.count_all_questions; i++) {
             _this.array.push(i);
           }
-        } // for (var i = 0; i < this.count_all_questions; i++) {
-        //     this.array.push(i);
-        // }
+        }
 
-
-        console.log(_this.array);
         var aaa = _this.array;
 
         var num = _this.array[Math.floor(Math.random() * aaa.length)]; //持ってきたQからランダムで1つ取る。重複はしないように。
+        //apiが叩かれた初回に、取得してきた件数で配列を作る。出題された数は配列から取り除く。
+        //res.dataを別の関数で仕様する方法がわからず、こんな処理に
 
 
         _this.questions = res.data[num];
-        console.log(num);
         aaa.some(function (v, i) {
           if (v == num) aaa.splice(i, 1);
         });
-        _this.array = aaa;
-        console.log(_this.array); //console.log(this.count_all_questions);
-        //画像があれば表示
+        _this.array = aaa; //画像があれば表示
 
         _this.filepath = _this.questions.image_path;
 
@@ -2116,7 +2099,8 @@ __webpack_require__.r(__webpack_exports__);
           _this.image = true;
         } else {
           _this.image = false;
-        }
+        } //選択肢のリセット
+
 
         _this.sentakushi = []; //選択肢をランダムで表示するため
 
@@ -2128,8 +2112,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.sentakushi[_i] = _ref[0];
           _this.sentakushi[j] = _ref[1];
         }
-      }); //  console.log(this.filepath);
-      //  this.filepath="asset('/storage/img/"+this.questions.image_path+")";
+      });
     },
     next: function next() {
       this.image = false;
@@ -2143,11 +2126,10 @@ __webpack_require__.r(__webpack_exports__);
       this.tag_id++;
       this.now_count++;
       this.questions = {};
-      this.sentakushi = []; // if(this.now_count >= this.count_all_questions){
+      this.sentakushi = []; //3回目の問題が終わるとリザルトを表示
 
       if (this.now_count > 2) {
-        console.log("もう問題が無いよ");
-        console.log(this.result);
+        console.log("３回終わりました");
         this.after_show_result = false;
         this.image = false;
 
@@ -2165,10 +2147,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       } else {
         this.getQuestion();
-      } // this.getQuestion();
-
-
-      console.log("next()が処理されています！" + this.tag_id);
+      }
     }
   },
   mounted: function mounted() {// this.getQuestion();
