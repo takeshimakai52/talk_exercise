@@ -14,13 +14,13 @@ Vue.js 2.6.11<br>
 ![index_view](https://user-images.githubusercontent.com/58460151/78371212-9cbf0d00-7602-11ea-8451-4ccb41183d87.png)
 
 データベースに登録されている会話からランダムに3つが出題されます。<br>
-その間はVueを使用しているためページ遷移はありません。<br>
-その後選択に応じて結果が表示されます。<br>
+この画面ではVueを使用しています。<br>
+3つの問題が終わりますと、あなたの選択に応じたリザルトが表示されます。<br>
 
 右上のメニューからユーザー登録をしていただくと会話を作成することができます。<br>
 
 ![create_view](https://user-images.githubusercontent.com/58460151/78371485-ffb0a400-7602-11ea-9061-20157246b7e5.png)
 
-
 作成した会話はログイン後のHome画面にて管理していただけます。<br>
 
+![home_view](https://user-images.githubusercontent.com/58460151/78372131-dc3a2900-7603-11ea-95cb-21c5cdf9bdd9.png)
